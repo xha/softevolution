@@ -8,7 +8,7 @@ class Marca extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Marca_model');
+        $this->load->model('marca_model');
         $this->isLogged();
     } 
 
@@ -17,7 +17,7 @@ class Marca extends CI_Controller{
      */
     function index()
     {
-        $data['marca'] = $this->Marca_model->get_all_marca();
+        $data['marca'] = $this->marca_model->get_all_marca();
         
         $data['_view'] = 'marca/index';
         $this->load->view('layouts/main',$data);
@@ -35,7 +35,7 @@ class Marca extends CI_Controller{
 				'activo' => $this->input->post('activo'),
             );
             
-            $marca_id = $this->Marca_model->add_marca($params);
+            $marca_id = $this->marca_model->add_marca($params);
             redirect('marca/index');
         }
         else
@@ -51,7 +51,7 @@ class Marca extends CI_Controller{
     function edit($id_marca)
     {   
         // check if the marca exists before trying to edit it
-        $data['marca'] = $this->Marca_model->get_marca($id_marca);
+        $data['marca'] = $this->marca_model->get_marca($id_marca);
         
         if(isset($data['marca']['id_marca']))
         {
@@ -62,7 +62,7 @@ class Marca extends CI_Controller{
 					'activo' => $this->input->post('activo'),
                 );
 
-                $this->Marca_model->update_marca($id_marca,$params);            
+                $this->marca_model->update_marca($id_marca,$params);            
                 redirect('marca/index');
             }
             else
@@ -80,12 +80,12 @@ class Marca extends CI_Controller{
      */
     function remove($id_marca)
     {
-        $marca = $this->Marca_model->get_marca($id_marca);
+        $marca = $this->marca_model->get_marca($id_marca);
 
         // check if the marca exists before trying to delete it
         if(isset($marca['id_marca']))
         {
-            $this->Marca_model->delete_marca($id_marca);
+            $this->marca_model->delete_marca($id_marca);
             redirect('marca/index');
         }
         else

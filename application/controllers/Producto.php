@@ -8,7 +8,7 @@ class Producto extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Producto_model');
+        $this->load->model('producto_model');
         $this->isLogged();
     } 
 
@@ -17,7 +17,7 @@ class Producto extends CI_Controller{
      */
     function index()
     {
-        $data['producto'] = $this->Producto_model->get_all_producto();
+        $data['producto'] = $this->producto_model->get_all_producto();
         
         $data['_view'] = 'producto/index';
         $this->load->view('layouts/main',$data);
@@ -39,13 +39,13 @@ class Producto extends CI_Controller{
                 'activo' => $this->input->post('activo'),
             );
             
-            $producto_id = $this->Producto_model->add_producto($params);
+            $producto_id = $this->producto_model->add_producto($params);
             redirect('producto/index');
         }
         else
         {            
-            $data['categorias'] = $this->Producto_model->get_all_categoria();
-            $data['marcas'] = $this->Producto_model->get_all_marca();
+            $data['categorias'] = $this->producto_model->get_all_categoria();
+            $data['marcas'] = $this->producto_model->get_all_marca();
             $data['_view'] = 'producto/add';
             $this->load->view('layouts/main',$data);
         }
@@ -57,7 +57,7 @@ class Producto extends CI_Controller{
     function edit($id_producto)
     {   
         // check if the producto exists before trying to edit it
-        $data['producto'] = $this->Producto_model->get_producto($id_producto);
+        $data['producto'] = $this->producto_model->get_producto($id_producto);
         
         if(isset($data['producto']['id_producto']))
         {
@@ -72,13 +72,13 @@ class Producto extends CI_Controller{
 					'activo' => $this->input->post('activo'),
                 );
 
-                $this->Producto_model->update_producto($id_producto,$params);            
+                $this->producto_model->update_producto($id_producto,$params);            
                 redirect('producto/index');
             }
             else
             {
-                $data['categorias'] = $this->Producto_model->get_all_categoria();
-                $data['marcas'] = $this->Producto_model->get_all_marca();
+                $data['categorias'] = $this->producto_model->get_all_categoria();
+                $data['marcas'] = $this->producto_model->get_all_marca();
                 $data['_view'] = 'producto/edit';
                 $this->load->view('layouts/main',$data);
             }
@@ -92,12 +92,12 @@ class Producto extends CI_Controller{
      */
     function remove($id_producto)
     {
-        $producto = $this->Producto_model->get_producto($id_producto);
+        $producto = $this->producto_model->get_producto($id_producto);
 
         // check if the producto exists before trying to delete it
         if(isset($producto['id_producto']))
         {
-            $this->Producto_model->delete_producto($id_producto);
+            $this->producto_model->delete_producto($id_producto);
             redirect('producto/index');
         }
         else

@@ -8,7 +8,7 @@ class Categoria extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Categoria_model');
+        $this->load->model('categoria_model');
         //$this->isLogged();
     } 
 
@@ -17,7 +17,7 @@ class Categoria extends CI_Controller{
      */
     function index()
     {
-        $data['categoria'] = $this->Categoria_model->get_all_categoria();
+        $data['categoria'] = $this->categoria_model->get_all_categoria();
         
         $data['_view'] = 'categoria/index';
         $this->load->view('layouts/main',$data);
@@ -40,7 +40,7 @@ class Categoria extends CI_Controller{
                     'activo' => $this->input->post('activo'),
                 );
 
-                $categoria_id = $this->Categoria_model->add_categoria($params);
+                $categoria_id = $this->categoria_model->add_categoria($params);
                 redirect('categoria/index');
             }
         } else {            
@@ -55,7 +55,7 @@ class Categoria extends CI_Controller{
     function edit($id_categoria)
     {   
         // check if the categoria exists before trying to edit it
-        $data['categoria'] = $this->Categoria_model->get_categoria($id_categoria);
+        $data['categoria'] = $this->categoria_model->get_categoria($id_categoria);
         
         if(isset($data['categoria']['id_categoria']))
         {
@@ -66,7 +66,7 @@ class Categoria extends CI_Controller{
 					'activo' => $this->input->post('activo'),
                 );
 
-                $this->Categoria_model->update_categoria($id_categoria,$params);            
+                $this->categoria_model->update_categoria($id_categoria,$params);            
                 redirect('categoria/index');
             }
             else
@@ -84,12 +84,12 @@ class Categoria extends CI_Controller{
      */
     function remove($id_categoria)
     {
-        $categoria = $this->Categoria_model->get_categoria($id_categoria);
+        $categoria = $this->categoria_model->get_categoria($id_categoria);
 
         // check if the categoria exists before trying to delete it
         if(isset($categoria['id_categoria']))
         {
-            $this->Categoria_model->delete_categoria($id_categoria);
+            $this->categoria_model->delete_categoria($id_categoria);
             redirect('categoria/index');
         }
         else

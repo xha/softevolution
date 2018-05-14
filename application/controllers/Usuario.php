@@ -8,7 +8,7 @@ class Usuario extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Usuario_model');
+        $this->load->model('usuario_model');
     } 
 
     /*
@@ -16,7 +16,7 @@ class Usuario extends CI_Controller{
      */
     function index()
     {
-        $data['usuario'] = $this->Usuario_model->get_all_usuario();
+        $data['usuario'] = $this->usuario_model->get_all_usuario();
         
         $data['_view'] = 'usuario/index';
         $this->load->view('layouts/main',$data);
@@ -36,12 +36,12 @@ class Usuario extends CI_Controller{
                 'nombre' => $this->input->post('nombre'),
             );
             
-            $usuario_id = $this->Usuario_model->add_usuario($params);
+            $usuario_id = $this->usuario_model->add_usuario($params);
             redirect('usuario/index');
         }
         else
         {            
-            $data['roles'] = $this->Usuario_model->get_all_rol();
+            $data['roles'] = $this->usuario_model->get_all_rol();
             $data['_view'] = 'usuario/add';
             $this->load->view('layouts/main',$data);
         }
@@ -53,7 +53,7 @@ class Usuario extends CI_Controller{
     function edit($id_usuario)
     {   
         // check if the usuario exists before trying to edit it
-        $data['usuario'] = $this->Usuario_model->get_usuario($id_usuario);
+        $data['usuario'] = $this->usuario_model->get_usuario($id_usuario);
         
         if(isset($data['usuario']['id_usuario']))
         {
@@ -66,12 +66,12 @@ class Usuario extends CI_Controller{
                     'nombre' => $this->input->post('nombre'),
                 );
 
-                $this->Usuario_model->update_usuario($id_usuario,$params);            
+                $this->usuario_model->update_usuario($id_usuario,$params);            
                 redirect('usuario/index');
             }
             else
             {
-                $data['roles'] = $this->Usuario_model->get_all_rol();
+                $data['roles'] = $this->usuario_model->get_all_rol();
                 $data['_view'] = 'usuario/edit';
                 $this->load->view('layouts/main',$data);
             }
@@ -85,12 +85,12 @@ class Usuario extends CI_Controller{
      */
     function remove($id_usuario)
     {
-        $usuario = $this->Usuario_model->get_usuario($id_usuario);
+        $usuario = $this->usuario_model->get_usuario($id_usuario);
 
         // check if the usuario exists before trying to delete it
         if(isset($usuario['id_usuario']))
         {
-            $this->Usuario_model->delete_usuario($id_usuario);
+            $this->usuario_model->delete_usuario($id_usuario);
             redirect('usuario/index');
         }
         else
