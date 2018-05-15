@@ -36,6 +36,9 @@
                   <!-- Sidebar toggle button-->
                   <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                   </a>
                   <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
@@ -43,7 +46,7 @@
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="<?= site_url('resources/img/'.$this->session->userdata('id_usuario').'.jpg');?>" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Demo</span>
+                                    <span class="hidden-xs"><?= $this->session->userdata('nombre'); ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
@@ -79,21 +82,33 @@
                                 <i class="fa fa-dashboard"></i> <span>Inicio</span>
                             </a>
                         </li>
-			<li class="treeview">
-                            <a href="<?= site_url('categoria/index');?>"><i class="fa fa-book"></i>Categor&iacute;a</a>
+			<li>
+                            <a href="<?= site_url('categoria/index');?>">
+                                <i class="fa fa-book"></i>
+                                <span>Categor&iacute;a</span>
+                            </a>
                         </li>
-			<li class="treeview">
-                            <a href="<?= site_url('marca/index');?>"><i class="fa fa-star"></i>Marca</a>
+			<li>
+                            <a href="<?= site_url('marca/index');?>">
+                                <i class="fa fa-star"></i>
+                                <span>Marca</span>
+                            </a>
                         </li>
-			<li class="treeview">
-                            <a href="<?= site_url('producto/index');?>"><i class="fa fa-bars"></i>Producto</a>
+			<li>
+                            <a href="<?= site_url('producto/index');?>">
+                                <i class="fa fa-bars"></i>
+                                <span>Producto</span>
+                            </a>
                         </li>
                         <?php
                             if($_SESSION['id_rol'] == ROLE_ADMIN)
                             {
                         ?>
-                            <li class="treeview">
-                                <a href="<?= site_url('usuario/index');?>"><i class="fa fa-users"></i>Usuarios</a>
+                            <li>
+                                <a href="<?= site_url('usuario/index');?>">
+                                    <i class="fa fa-users"></i>
+                                    <span>Usuarios</span>
+                                </a>
                             </li>
                             <?php
                             }
